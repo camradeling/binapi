@@ -47,12 +47,14 @@ set(BINAPI_SOURCES
     src/websocket.cpp
 )
 
+add_library(${PROJECT_NAME}_static STATIC
+    ${BINAPI_SOURCES}
+    )
+
 add_executable(
     ${PROJECT_NAME}
     #
     main.cpp
-    #
-    ${BINAPI_SOURCES}
 )
 
 if (DEFINED ${BOOST_LIB_DIR})
@@ -64,6 +66,7 @@ endif()
 
 target_link_libraries(
     ${PROJECT_NAME}
+    lib${PROJECT_NAME}_static.a
     z
     crypto
     ssl
